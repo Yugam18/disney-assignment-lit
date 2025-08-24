@@ -44,7 +44,8 @@ export class CharacterUtils {
         if (character.imageUrl) {
             return character.imageUrl;
         }
-        return '';
+        // Fallback to Disney logo image
+        return '/images/disney.avif';
     }
 
     static formatArrayData(data: string[] | undefined): string {

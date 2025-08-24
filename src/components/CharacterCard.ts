@@ -8,6 +8,13 @@ import './CharacterProfile.js';
 export class CharacterCard extends LitElement {
   @property({ type: Object }) character!: DisneyCharacter;
   @property({ type: Boolean }) showProfile = false;
+  @property({ type: Boolean }) imageError = false;
+
+  updated(changedProperties: Map<string, unknown>) {
+    if (changedProperties.has('character')) {
+      this.imageError = false;
+    }
+  }
 
   static styles = css`
     :host {
@@ -29,6 +36,11 @@ export class CharacterCard extends LitElement {
       height: 200px;
       object-fit: cover;
       background: #f3f4f6;
+      transition: opacity 0.3s ease;
+    }
+
+    .card-image.error {
+      opacity: 0.7;
     }
 
     .card-content {
@@ -88,6 +100,12 @@ export class CharacterCard extends LitElement {
     this.showProfile = false;
   }
 
+  private handleImageError(e: Event) {
+    const target = e.target as HTMLImageElement;
+    this.imageError = true;
+    target.src = '/images/disney.avif';
+  }
+
   render() {
     const isFavorited = CharacterUtils.isFavorite(this.character._id);
     const imageUrl = CharacterUtils.getCharacterImageUrl(this.character);
@@ -95,13 +113,10 @@ export class CharacterCard extends LitElement {
     return html`
       <div class="card" @click="${this.openProfile}">
         <img 
-          class="card-image" 
+          class="card-image ${this.imageError ? 'error' : ''}" 
           src="${imageUrl}" 
           alt="${this.character.name}"
-          @error="${(e: Event) => {
-        const target = e.target as HTMLImageElement;
-        target.src = CharacterUtils.getCharacterImageUrl({} as DisneyCharacter);
-      }}"
+          @error="${this.handleImageError}"
         >
         <div class="card-content">
           <h3 class="character-name">${this.character.name}</h3>
