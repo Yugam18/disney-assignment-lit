@@ -92,12 +92,6 @@ src/
 - **Smart Autocomplete**: Get instant character name suggestions as you type
 - **Advanced Filters**: Use the filter panel to narrow results by specific films, TV shows, or video games
 
-### Navigation
-- **Browse**: Scroll through the character cards to explore Disney characters
-- **Favorites**: Click the heart icon to add characters to your favorites
-- **Details**: Click on any character card to view detailed information
-- **URL Sharing**: Filtered results are saved in the URL for easy sharing and bookmarking
-
 ## Code Architecture
 
 ### Recent Improvements
@@ -112,15 +106,3 @@ src/
 - **CharacterCard**: Displays character information in an attractive card format
 - **SearchUtils**: Contains search logic and suggestion generation
 - **AppUtils**: Manages URL state and character filtering
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License.
-
